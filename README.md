@@ -2,9 +2,14 @@
 ### Creates a Docker container for running the Time Machine compatible backup service.
 Based on my bare metal TimeMachine install and [willtho89's](https://github.com/willtho89) [script files](https://github.com/willtho89/docker-samba-timemachine)
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/rustic/docker-timemachine/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/rustic/docker-timemachine/tree/master)
-[![Image Size](https://img.shields.io/docker/image-size/rustic/docker-timemachine/latest)](https://hub.docker.com/repository/docker/rustic/docker-timemachine)
-[![License](https://img.shields.io/github/license/rustic/docker-timemachine)](https://hub.docker.com/repository/docker/rustic/docker-timemachine)
+[![Release](https://github.com/michalg-/docker-timemachine/actions/workflows/release.yml/badge.svg)](https://github.com/michalg-/docker-timemachine/actions/workflows/release.yml)
+[![License](https://img.shields.io/github/license/michalg-/docker-timemachine)](https://github.com/michalg-/docker-timemachine/blob/master/LICENSE)
+
+### Image
+
+```sh
+docker pull ghcr.io/michalg-/docker-timemachine:latest
+```
 
 ### Environment Variables
 | Variable  | Function                | Default.    |
@@ -13,3 +18,12 @@ Based on my bare metal TimeMachine install and [willtho89's](https://github.com/
 | TM_PW     | User's Password         | timemachine |
 | TM_ID     | UserID                  | 1000        |
 | TM_SIZE   | Time Machine Size in GB | 250         |
+
+### Releasing
+
+Push a semver tag to build and publish a multi-arch image to GitHub Container Registry and create a GitHub release:
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```

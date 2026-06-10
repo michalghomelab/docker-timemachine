@@ -1,14 +1,11 @@
-FROM alpine:latest
-RUN apk update \
-    && apk upgrade
+FROM alpine:3.24
 
-RUN apk add --no-cache \
+RUN apk add --no-cache --upgrade \
     avahi \
     samba \
+    samba-client \
     supervisor \
-    && sed -i 's/#enable-dbus=yes/enable-dbus=no/g' /etc/avahi/avahi-daemon.conf \
-    && rm -rf /var/cache/apk/* \
-    && rm /etc/avahi/services/*
+    && rm -f /etc/avahi/services/*
 
 COPY samba/samba.service /etc/avahi/services/samba.service
 COPY samba/smb.conf /etc/samba/smb.conf
@@ -22,7 +19,6 @@ EXPOSE 445
 ENTRYPOINT ["/tmp/setup.sh"]
 
 HEALTHCHECK --interval=5m --timeout=3s \
-  CMD (avahi-daemon -c && \
-        smbclient -L '\\localhost' -U '%' -m SMB3 &>/dev/null) || exit 1
+  CMD avahi-daemon -c && smbclient -L localhost -U '%' -m SMB3 >/dev/null 2>&1 || exit 1
 
 CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
