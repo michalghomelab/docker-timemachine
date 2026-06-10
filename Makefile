@@ -1,4 +1,4 @@
-IMAGE ?= ghcr.io/michalg-/docker-timemachine
+IMAGE ?= ghcr.io/michalghomelab/docker-timemachine
 TAG ?= latest
 PLATFORMS ?= linux/amd64,linux/arm64
 

@@ -1,6 +1,6 @@
 services:
   timemachine:
-    image: ghcr.io/michalg-/docker-timemachine:latest
+    image: ghcr.io/michalghomelab/docker-timemachine:latest
     network_mode: host
     volumes:
       - ${SRC_DIR}/timemachine:/timemachine:z

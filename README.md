@@ -8,7 +8,7 @@ Based on my bare metal TimeMachine install and [willtho89's](https://github.com/
 ### Image
 
 ```sh
-docker pull ghcr.io/michalg-/docker-timemachine:latest
+docker pull ghcr.io/michalghomelab/docker-timemachine:latest
 ```
 
 ### Environment Variables
