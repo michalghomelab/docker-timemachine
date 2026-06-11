@@ -5,6 +5,7 @@ TM_USER="${TM_USER:-timemachine}"
 TM_PW="${TM_PW:-timemachine}"
 TM_ID="${TM_ID:-1000}"
 TM_SIZE="${TM_SIZE:-250}"
+INTERFACE="${INTERFACE:-enp1s0}"
 #Add smb user
     grep -q "^${TM_USER}:" /etc/passwd ||
         adduser -D -H ${TM_GROUP:+-G $TM_GROUP} ${TM_ID:+-u $TM_ID} "${TM_USER}"
@@ -17,10 +18,16 @@ fi
 
 
 chown -R ${TM_USER} "/timemachine"
-TM_SIZE=$(($TM_SIZE * 1000000000))
-sed "s#REPLACE_TM_SIZE#${TM_SIZE}#" /tmp/template_quota > /timemachine/.com.apple.TimeMachine.quota.plist
+TM_SIZE_BYTES=$(($TM_SIZE * 1000000000))
+sed "s#REPLACE_TM_SIZE#${TM_SIZE_BYTES}#" /tmp/template_quota > /timemachine/.com.apple.TimeMachine.quota.plist
 
-INTERFACE="${INTERFACE:-enp1s0}"
+# Configure Samba
+sed -i \
+    -e "s#REPLACE_INTERFACE#${INTERFACE}#" \
+    -e "s#REPLACE_TM_SIZE_GB#${TM_SIZE}#" \
+    /etc/samba/smb.conf
+
+echo "INFO: Samba configured to bind lo and ${INTERFACE}; Time Machine max size is ${TM_SIZE}G"
 
 # Configure Avahi
 cat > /etc/avahi/avahi-daemon.conf <<EOF

@@ -2,8 +2,8 @@
 ### Creates a Docker container for running the Time Machine compatible backup service.
 Based on my bare metal TimeMachine install and [willtho89's](https://github.com/willtho89) [script files](https://github.com/willtho89/docker-samba-timemachine)
 
-[![Release](https://github.com/michalg-/docker-timemachine/actions/workflows/release.yml/badge.svg)](https://github.com/michalg-/docker-timemachine/actions/workflows/release.yml)
-[![License](https://img.shields.io/github/license/michalg-/docker-timemachine)](https://github.com/michalg-/docker-timemachine/blob/master/LICENSE)
+[![Release](https://github.com/michalghomelab/docker-timemachine/actions/workflows/release.yml/badge.svg)](https://github.com/michalghomelab/docker-timemachine/actions/workflows/release.yml)
+[![License](https://img.shields.io/github/license/michalghomelab/docker-timemachine)](https://github.com/michalghomelab/docker-timemachine/blob/master/LICENSE)
 
 ### Image
 
@@ -18,6 +18,7 @@ docker pull ghcr.io/michalghomelab/docker-timemachine:latest
 | TM_PW     | User's Password         | timemachine |
 | TM_ID     | UserID                  | 1000        |
 | TM_SIZE   | Time Machine Size in GB | 250         |
+| INTERFACE | Host network interface  | enp1s0      |
 
 ### Releasing
 

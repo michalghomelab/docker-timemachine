@@ -7,3 +7,6 @@ services:
     environment:
       - TM_USER=${TM_USER}
       - TM_PW=${TM_PW}
+      - TM_ID=${TM_ID:-1000}
+      - TM_SIZE=${TM_SIZE:-250}
+      - INTERFACE=${INTERFACE:-enp1s0}
